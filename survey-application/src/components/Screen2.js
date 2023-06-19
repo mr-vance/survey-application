@@ -29,53 +29,57 @@ const Screen2 = ({ handleScreenChange }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsSubmitting(true);
-
+  
     // Clear previous errors
     setErrors({});
-
+  
     // Form validation
     const validationErrors = {};
-
+  
     if (!surname.trim()) {
       validationErrors.surname = 'Surname is required';
     }
-
+  
     if (!firstNames.trim()) {
       validationErrors.firstNames = 'First Names are required';
     }
-
+  
     if (!contactNumber.trim()) {
       validationErrors.contactNumber = 'Contact Number is required';
     } else if (!validateContactNumber(contactNumber)) {
       validationErrors.contactNumber = 'Please enter a valid South African phone number';
     }
-
+  
     if (favoriteFoods.length === 0) {
       validationErrors.favoriteFoods = 'Please select at least one Favorite Food';
     }
-
+  
     if (parseInt(ratings.eatOut) > 5 || parseInt(ratings.eatOut) < 1) {
       validationErrors.eatOutRating = 'Please enter a rating between 1 and 5';
     }
-
+  
     if (parseInt(ratings.watchMovies) > 5 || parseInt(ratings.watchMovies) < 1) {
       validationErrors.moviesRating = 'Please enter a rating between 1 and 5';
     }
-
+  
     if (parseInt(ratings.watchTV) > 5 || parseInt(ratings.watchTV) < 1) {
       validationErrors.tvRating = 'Please enter a rating between 1 and 5';
     }
-
+  
     if (parseInt(ratings.listenToRadio) > 5 || parseInt(ratings.listenToRadio) < 1) {
       validationErrors.radioRating = 'Please enter a rating between 1 and 5';
     }
-
+  
+    if (!age || age < 5 || age > 120) {
+      validationErrors.age = 'Please enter an age between 5 and 120';
+    }
+  
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsSubmitting(false);
       return;
     }
-
+  
     // Get the form data
     const formData = {
       surname: surname,
@@ -86,11 +90,11 @@ const Screen2 = ({ handleScreenChange }) => {
       favoriteFoods: favoriteFoods,
       ratings: ratings,
     };
-
+  
     // Save the data to the database
     const surveyRef = database.ref('surveys');
     surveyRef.push(formData);
-
+  
     // Reset the form fields
     setSurname('');
     setFirstNames('');
@@ -100,10 +104,11 @@ const Screen2 = ({ handleScreenChange }) => {
     setFavoriteFoods([]);
     setRatings({});
     setIsSubmitting(false);
-
+  
     // Return to Screen 1
     handleScreenChange(1);
   };
+  
 
   return (
     <div className="container">
@@ -168,9 +173,6 @@ const Screen2 = ({ handleScreenChange }) => {
             id="age"
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            required
-            min={5}  // Add the min attribute
-            max={200}  // Add the max attribute
         />
         {errors.age && <div className="error">{errors.age}</div>}
         </div>
