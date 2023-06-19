@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { firebase, database } from '../firebase';
+
 
 const Screen2 = ({ handleScreenChange }) => {
   const [surname, setSurname] = useState('');
@@ -18,37 +18,36 @@ const Screen2 = ({ handleScreenChange }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // Save survey data to Firebase database
-    const surveyData = {
-      surname,
-      firstNames,
-      contactNumber,
-      date,
-      age,
-      favoriteFoods,
-      ratings,
+  
+    // Get the form data
+    const formData = {
+      surname: surname,
+      firstName: firstNames, // Updated variable name
+      contactNumber: contactNumber,
+      date: date,
+      age: age,
+      favoriteFood: favoriteFoods, // Updated variable name
+      ratings: ratings,
     };
-
-    firebase.database().ref('surveys').push(surveyData);
-
-    // Reset form fields
+  
+    // Save the data to the database
+    const surveyRef = database.ref('surveys'); // Remove the '.push()' method
+    surveyRef.push(formData); // Use '.push()' to create a new entry in the database
+  
+    // Reset the form fields
     setSurname('');
     setFirstNames('');
     setContactNumber('');
     setDate('');
     setAge('');
     setFavoriteFoods([]);
-    setRatings({
-      eatOut: '',
-      watchMovies: '',
-      watchTV: '',
-      listenToRadio: '',
-    });
-
+    setRatings({});
+  
     // Return to Screen 1
     handleScreenChange(1);
   };
+  
+  
 
   return (
     <div>
