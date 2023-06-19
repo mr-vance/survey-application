@@ -216,4 +216,8 @@ body {
       border: 0;
     }
   }
+
+  .error {
+    color: red;
+  }
   

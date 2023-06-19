@@ -17,8 +17,64 @@ const Screen2 = ({ handleScreenChange }) => {
     listenToRadio: '',
   });
 
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateContactNumber = (contactNumber) => {
+    // South African phone number format: 10 digits starting with 0
+    const phoneNumberPattern = /^0\d{9}$/;
+    return phoneNumberPattern.test(contactNumber);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
+
+    // Clear previous errors
+    setErrors({});
+
+    // Form validation
+    const validationErrors = {};
+
+    if (!surname.trim()) {
+      validationErrors.surname = 'Surname is required';
+    }
+
+    if (!firstNames.trim()) {
+      validationErrors.firstNames = 'First Names are required';
+    }
+
+    if (!contactNumber.trim()) {
+      validationErrors.contactNumber = 'Contact Number is required';
+    } else if (!validateContactNumber(contactNumber)) {
+      validationErrors.contactNumber = 'Please enter a valid South African phone number';
+    }
+
+    if (favoriteFoods.length === 0) {
+      validationErrors.favoriteFoods = 'Please select at least one Favorite Food';
+    }
+
+    if (parseInt(ratings.eatOut) > 5 || parseInt(ratings.eatOut) < 1) {
+      validationErrors.eatOutRating = 'Please enter a rating between 1 and 5';
+    }
+
+    if (parseInt(ratings.watchMovies) > 5 || parseInt(ratings.watchMovies) < 1) {
+      validationErrors.moviesRating = 'Please enter a rating between 1 and 5';
+    }
+
+    if (parseInt(ratings.watchTV) > 5 || parseInt(ratings.watchTV) < 1) {
+      validationErrors.tvRating = 'Please enter a rating between 1 and 5';
+    }
+
+    if (parseInt(ratings.listenToRadio) > 5 || parseInt(ratings.listenToRadio) < 1) {
+      validationErrors.radioRating = 'Please enter a rating between 1 and 5';
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsSubmitting(false);
+      return;
+    }
 
     // Get the form data
     const formData = {
@@ -43,6 +99,7 @@ const Screen2 = ({ handleScreenChange }) => {
     setAge('');
     setFavoriteFoods([]);
     setRatings({});
+    setIsSubmitting(false);
 
     // Return to Screen 1
     handleScreenChange(1);
@@ -60,10 +117,12 @@ const Screen2 = ({ handleScreenChange }) => {
               type="text"
               className="form-control"
               id="surname"
+              placeholder="Smith"
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
               required
             />
+            {errors.surname && <div className="error">{errors.surname}</div>}
           </div>
           <div className="form-group">
             <label htmlFor="firstNames">First Names:</label>
@@ -71,10 +130,12 @@ const Screen2 = ({ handleScreenChange }) => {
               type="text"
               className="form-control"
               id="firstNames"
+              placeholder="John"
               value={firstNames}
               onChange={(e) => setFirstNames(e.target.value)}
               required
             />
+            {errors.firstNames && <div className="error">{errors.firstNames}</div>}
           </div>
           <div className="form-group">
             <label htmlFor="contactNumber">Contact Number:</label>
@@ -82,10 +143,12 @@ const Screen2 = ({ handleScreenChange }) => {
               type="tel"
               className="form-control"
               id="contactNumber"
+              placeholder="0723456789"
               value={contactNumber}
               onChange={(e) => setContactNumber(e.target.value)}
               required
             />
+            {errors.contactNumber && <div className="error">{errors.contactNumber}</div>}
           </div>
           <div className="form-group">
             <label htmlFor="date">Date:</label>
@@ -95,201 +158,86 @@ const Screen2 = ({ handleScreenChange }) => {
               id="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              required
             />
           </div>
+                <div className="form-group">
+        <label htmlFor="age">Age:</label>
+        <input
+            type="number"
+            className="form-control"
+            id="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            required
+            min={5}  // Add the min attribute
+            max={200}  // Add the max attribute
+        />
+        {errors.age && <div className="error">{errors.age}</div>}
+        </div>
           <div className="form-group">
-            <label htmlFor="age">Age:</label>
+            <label htmlFor="favoriteFoods">Favorite Foods. Select multiple items by holding down the Ctrl key:</label>
+            <select
+              multiple
+              className="form-control"
+              id="favoriteFoods"
+              value={favoriteFoods}
+              onChange={(e) => setFavoriteFoods(Array.from(e.target.selectedOptions, (option) => option.value))}
+            >
+              <option value="pizza">Pizza</option>
+              <option value="burger">Burger</option>
+              <option value="sushi">Sushi</option>
+              <option value="pasta">Pasta</option>
+            </select>
+            {errors.favoriteFoods && <div className="error">{errors.favoriteFoods}</div>}
+          </div>
+          <div className="form-group">
+            <label htmlFor="eatOutRating">Rate Eating Out (1-5):</label>
             <input
               type="number"
               className="form-control"
-              id="age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Favorite Foods:</label>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="favoriteFoods"
-                  value="Pizza"
-                  checked={favoriteFoods.includes('Pizza')}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setFavoriteFoods([...favoriteFoods, 'Pizza']);
-                    } else {
-                      setFavoriteFoods(
-                        favoriteFoods.filter((food) => food !== 'Pizza')
-                      );
-                    }
-                  }}
-                />
-                Pizza
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="favoriteFoods"
-                  value="Pasta"
-                  checked={favoriteFoods.includes('Pasta')}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setFavoriteFoods([...favoriteFoods, 'Pasta']);
-                    } else {
-                      setFavoriteFoods(
-                        favoriteFoods.filter((food) => food !== 'Pasta')
-                      );
-                    }
-                  }}
-                />
-                Pasta
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="favoriteFoods"
-                  value="Pap and Wors"
-                  checked={favoriteFoods.includes('Pap and Wors')}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setFavoriteFoods([...favoriteFoods, 'Pap and Wors']);
-                    } else {
-                      setFavoriteFoods(
-                        favoriteFoods.filter((food) => food !== 'Pap and Wors')
-                      );
-                    }
-                  }}
-                />
-                Pap and Wors
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="favoriteFoods"
-                  value="Chicken stir fry"
-                  checked={favoriteFoods.includes('Chicken stir fry')}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setFavoriteFoods([...favoriteFoods, 'Chicken stir fry']);
-                    } else {
-                      setFavoriteFoods(
-                        favoriteFoods.filter((food) => food !== 'Chicken stir fry')
-                      );
-                    }
-                  }}
-                />
-                Chicken stir fry
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="favoriteFoods"
-                  value="Beef stir fry"
-                  checked={favoriteFoods.includes('Beef stir fry')}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setFavoriteFoods([...favoriteFoods, 'Beef stir fry']);
-                    } else {
-                      setFavoriteFoods(
-                        favoriteFoods.filter((food) => food !== 'Beef stir fry')
-                      );
-                    }
-                  }}
-                />
-                Beef stir fry
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="checkbox"
-                  name="favoriteFoods"
-                  value="Other"
-                  checked={favoriteFoods.includes('Other')}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setFavoriteFoods([...favoriteFoods, 'Other']);
-                    } else {
-                      setFavoriteFoods(
-                        favoriteFoods.filter((food) => food !== 'Other')
-                      );
-                    }
-                  }}
-                />
-                Other
-              </label>
-            </div>
-          </div>
-          <div className="form-group">
-            <label>I like to eat out:</label>
-            <input
-              type="number"
-              min="1"
-              max="5"
-              className="form-control"
+              id="eatOutRating"
               value={ratings.eatOut}
-              onChange={(e) =>
-                setRatings({ ...ratings, eatOut: e.target.value })
-              }
-              required
+              onChange={(e) => setRatings({ ...ratings, eatOut: e.target.value })}
             />
+            {errors.eatOutRating && <div className="error">{errors.eatOutRating}</div>}
           </div>
           <div className="form-group">
-            <label>I like to watch movies:</label>
+            <label htmlFor="moviesRating">Rate Watching Movies (1-5):</label>
             <input
               type="number"
-              min="1"
-              max="5"
               className="form-control"
+              id="moviesRating"
               value={ratings.watchMovies}
-              onChange={(e) =>
-                setRatings({ ...ratings, watchMovies: e.target.value })
-              }
-              required
+              onChange={(e) => setRatings({ ...ratings, watchMovies: e.target.value })}
             />
+            {errors.moviesRating && <div className="error">{errors.moviesRating}</div>}
           </div>
           <div className="form-group">
-            <label>I like to watch TV:</label>
+            <label htmlFor="tvRating">Rate Watching TV (1-5):</label>
             <input
               type="number"
-              min="1"
-              max="5"
               className="form-control"
+              id="tvRating"
               value={ratings.watchTV}
-              onChange={(e) =>
-                setRatings({ ...ratings, watchTV: e.target.value })
-              }
-              required
+              onChange={(e) => setRatings({ ...ratings, watchTV: e.target.value })}
             />
+            {errors.tvRating && <div className="error">{errors.tvRating}</div>}
           </div>
           <div className="form-group">
-            <label>I like to listen to the radio:</label>
+            <label htmlFor="radioRating">Rate Listening to Radio (1-5):</label>
             <input
               type="number"
-              min="1"
-              max="5"
               className="form-control"
+              id="radioRating"
               value={ratings.listenToRadio}
-              onChange={(e) =>
-                setRatings({ ...ratings, listenToRadio: e.target.value })
-              }
-              required
+              onChange={(e) => setRatings({ ...ratings, listenToRadio: e.target.value })}
             />
+            {errors.radioRating && <div className="error">{errors.radioRating}</div>}
           </div>
-          <button className="btn btn-primary btn-lg mr-3" >Submit</button>
-          <button className="btn btn-secondary btn-lg" onClick={() => handleScreenChange(1)}>Return to HomePage</button>
+          <button className="btn btn-primary" disabled={isSubmitting}>
+            Submit
+          </button>
+          <button className="btn btn-secondary" onClick={() => handleScreenChange(1)}>Return to HomePage</button>
         </form>
       </div>
     </div>
