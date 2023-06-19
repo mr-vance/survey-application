@@ -80,7 +80,7 @@ If you want to challenge yourself, you can consider the following enhancements:
 
 ## Technologies Used
 
-- [Add technologies used in your project here]
+- ReactJS, HTML, CSS, Google Firebase
 
 ## Getting Started
 
@@ -94,4 +94,4 @@ If you want to challenge yourself, you can consider the following enhancements:
 
 ## License
 
-[Add license information here]
+Apache-2.0 license

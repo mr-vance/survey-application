@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { firebase, database } from '../firebase';
 
-
 const Screen2 = ({ handleScreenChange }) => {
   const [surname, setSurname] = useState('');
   const [firstNames, setFirstNames] = useState('');
@@ -18,22 +17,22 @@ const Screen2 = ({ handleScreenChange }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
+
     // Get the form data
     const formData = {
       surname: surname,
-      firstName: firstNames, // Updated variable name
+      firstNames: firstNames,
       contactNumber: contactNumber,
       date: date,
       age: age,
-      favoriteFood: favoriteFoods, // Updated variable name
+      favoriteFoods: favoriteFoods,
       ratings: ratings,
     };
-  
+
     // Save the data to the database
-    const surveyRef = database.ref('surveys'); // Remove the '.push()' method
-    surveyRef.push(formData); // Use '.push()' to create a new entry in the database
-  
+    const surveyRef = database.ref('surveys');
+    surveyRef.push(formData);
+
     // Reset the form fields
     setSurname('');
     setFirstNames('');
@@ -42,12 +41,10 @@ const Screen2 = ({ handleScreenChange }) => {
     setAge('');
     setFavoriteFoods([]);
     setRatings({});
-  
+
     // Return to Screen 1
     handleScreenChange(1);
   };
-  
-  
 
   return (
     <div>
@@ -99,7 +96,7 @@ const Screen2 = ({ handleScreenChange }) => {
           />
         </div>
         <div>
-          <label>Favorite Food:</label>
+          <label>Favorite Foods:</label>
           <div>
             <label>
               <input
@@ -119,15 +116,151 @@ const Screen2 = ({ handleScreenChange }) => {
               />
               Pizza
             </label>
-            {/* Remaining food checkboxes */}
+            <label>
+              <input
+                type="checkbox"
+                name="favoriteFoods"
+                value="Pasta"
+                checked={favoriteFoods.includes('Pasta')}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setFavoriteFoods([...favoriteFoods, 'Pasta']);
+                  } else {
+                    setFavoriteFoods(
+                      favoriteFoods.filter((food) => food !== 'Pasta')
+                    );
+                  }
+                }}
+              />
+              Pasta
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="favoriteFoods"
+                value="Pap and Wors"
+                checked={favoriteFoods.includes('Pap and Wors')}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setFavoriteFoods([...favoriteFoods, 'Pap and Wors']);
+                  } else {
+                    setFavoriteFoods(
+                      favoriteFoods.filter((food) => food !== 'Pap and Wors')
+                    );
+                  }
+                }}
+              />
+              Pap and Wors
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="favoriteFoods"
+                value="Chicken stir fry"
+                checked={favoriteFoods.includes('Chicken stir fry')}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setFavoriteFoods([...favoriteFoods, 'Chicken stir fry']);
+                  } else {
+                    setFavoriteFoods(
+                      favoriteFoods.filter((food) => food !== 'Chicken stir fry')
+                    );
+                  }
+                }}
+              />
+              Chicken stir fry
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="favoriteFoods"
+                value="Beef stir fry"
+                checked={favoriteFoods.includes('Beef stir fry')}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setFavoriteFoods([...favoriteFoods, 'Beef stir fry']);
+                  } else {
+                    setFavoriteFoods(
+                      favoriteFoods.filter((food) => food !== 'Beef stir fry')
+                    );
+                  }
+                }}
+              />
+              Beef stir fry
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="favoriteFoods"
+                value="Other"
+                checked={favoriteFoods.includes('Other')}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setFavoriteFoods([...favoriteFoods, 'Other']);
+                  } else {
+                    setFavoriteFoods(
+                      favoriteFoods.filter((food) => food !== 'Other')
+                    );
+                  }
+                }}
+              />
+              Other
+            </label>
           </div>
         </div>
-        {/* Rating questions */}
+        <div>
+          <label>I like to eat out:</label>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value={ratings.eatOut}
+            onChange={(e) =>
+              setRatings({ ...ratings, eatOut: e.target.value })
+            }
+            required
+          />
+        </div>
+        <div>
+          <label>I like to watch movies:</label>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value={ratings.watchMovies}
+            onChange={(e) =>
+              setRatings({ ...ratings, watchMovies: e.target.value })
+            }
+            required
+          />
+        </div>
+        <div>
+          <label>I like to watch TV:</label>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value={ratings.watchTV}
+            onChange={(e) => setRatings({ ...ratings, watchTV: e.target.value })}
+            required
+          />
+        </div>
+        <div>
+          <label>I like to listen to the radio:</label>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            value={ratings.listenToRadio}
+            onChange={(e) =>
+              setRatings({ ...ratings, listenToRadio: e.target.value })
+            }
+            required
+          />
+        </div>
         <button type="submit">Submit</button>
       </form>
-      <button onClick={() => handleScreenChange(1)}>Return to HomePage</button>
     </div>
-    
   );
 };
 
