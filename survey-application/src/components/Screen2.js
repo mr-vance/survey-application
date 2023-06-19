@@ -49,7 +49,7 @@ const Screen2 = ({ handleScreenChange }) => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Screen 2 - Survey Form</h2>
       <form onSubmit={handleSubmit}>
         <div>

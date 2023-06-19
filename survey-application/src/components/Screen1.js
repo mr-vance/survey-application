@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles.css'  
 
 const Screen1 = ({ handleScreenChange }) => {
   const handleFillSurvey = () => {
@@ -10,7 +11,7 @@ const Screen1 = ({ handleScreenChange }) => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Screen 1</h1>
       <button onClick={handleFillSurvey}>Fill out survey</button>
       <button onClick={handleViewResults}>View survey results</button>
