@@ -1,11 +1,19 @@
 import React from 'react';
 
-const Screen1 = () => {
+const Screen1 = ({ handleScreenChange }) => {
+  const handleFillSurvey = () => {
+    handleScreenChange(2); // Navigate to Screen2
+  };
+
+  const handleViewResults = () => {
+    handleScreenChange(3); // Navigate to Screen3
+  };
+
   return (
     <div>
-      <h1>Welcome to the Survey Application</h1>
-      <button>Fill out survey</button>
-      <button>View survey results</button>
+      <h1>Screen 1</h1>
+      <button onClick={handleFillSurvey}>Fill out survey</button>
+      <button onClick={handleViewResults}>View survey results</button>
     </div>
   );
 };
