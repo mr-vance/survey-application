@@ -69,29 +69,67 @@ const Screen3 = ({ handleScreenChange }) => {
     if (surveyData.length === 0) {
       return <p>No survey data available</p>;
     }
-
+  
     const surveyStats = calculateSurveyStatistics();
-
+  
     return (
-    <div className="container">
+      <div className="container">
         <div className="jumbotron text-center">
-            <h2 className="display-4">Survey Statistics</h2>
-            <p className="lead">Welcome to Screen 3</p>
-            <p>Total number of surveys: {surveyStats.totalSurveys}</p>
-            <p>Average age: {surveyStats.averageAge}</p>
-            <p>Oldest person who participated: {surveyStats.oldestPerson}</p>
-            <p>Youngest person who participated: {surveyStats.youngestPerson}</p>
-            <p>Percentage of people who like Pizza: {surveyStats.pizzaPercentage}%</p>
-            <p>Percentage of people who like Pasta: {surveyStats.pastaPercentage}%</p>
-            <p>Percentage of people who like Pap and Wors: {surveyStats.papAndWorsPercentage}%</p>
-            <p>Average rating for "People like to eat out": {surveyStats.avgRatingEatOut}</p>
-            <p>Average rating for "People like to watch movies": {surveyStats.avgRatingMovies}</p>
-            <p>Average rating for "People like to watch TV": {surveyStats.avgRatingTV}</p>
-            <p>Average rating for "People like to listen to the radio": {surveyStats.avgRatingRadio}</p>
+          <h2 className="display-4">Survey Statistics</h2>
+          <p className="lead">Welcome to Screen 3</p>
+          <table className="table">
+            <tbody>
+              <tr>
+                <td>Total number of surveys:</td>
+                <td>{surveyStats.totalSurveys}</td>
+              </tr>
+              <tr>
+                <td>Average age:</td>
+                <td>{surveyStats.averageAge}</td>
+              </tr>
+              <tr>
+                <td>Oldest person who participated:</td>
+                <td>{surveyStats.oldestPerson}</td>
+              </tr>
+              <tr>
+                <td>Youngest person who participated:</td>
+                <td>{surveyStats.youngestPerson}</td>
+              </tr>
+              <tr>
+                <td>Percentage of people who like Pizza:</td>
+                <td>{surveyStats.pizzaPercentage}%</td>
+              </tr>
+              <tr>
+                <td>Percentage of people who like Pasta:</td>
+                <td>{surveyStats.pastaPercentage}%</td>
+              </tr>
+              <tr>
+                <td>Percentage of people who like Pap and Wors:</td>
+                <td>{surveyStats.papAndWorsPercentage}%</td>
+              </tr>
+              <tr>
+                <td>Average rating for "People like to eat out":</td>
+                <td>{surveyStats.avgRatingEatOut}</td>
+              </tr>
+              <tr>
+                <td>Average rating for "People like to watch movies":</td>
+                <td>{surveyStats.avgRatingMovies}</td>
+              </tr>
+              <tr>
+                <td>Average rating for "People like to watch TV":</td>
+                <td>{surveyStats.avgRatingTV}</td>
+              </tr>
+              <tr>
+                <td>Average rating for "People like to listen to the radio":</td>
+                <td>{surveyStats.avgRatingRadio}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    </div>
+      </div>
     );
   };
+  
 
   return (
     <div className="container">
