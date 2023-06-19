@@ -288,15 +288,8 @@ const Screen2 = ({ handleScreenChange }) => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg mr-3">
-            Submit
-          </button>
-          <button
-            className="btn btn-secondary btn-lg"
-            onClick={() => handleScreenChange(1)}
-          >
-            Return to HomePage
-          </button>
+          <button className="btn btn-primary btn-lg mr-3" >Submit</button>
+          <button className="btn btn-secondary btn-lg" onClick={() => handleScreenChange(1)}>Return to HomePage</button>
         </form>
       </div>
     </div>
