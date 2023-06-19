@@ -125,7 +125,9 @@ const Screen2 = ({ handleScreenChange }) => {
         {/* Rating questions */}
         <button type="submit">Submit</button>
       </form>
+      <button onClick={() => handleScreenChange(1)}>Return to HomePage</button>
     </div>
+    
   );
 };
 
