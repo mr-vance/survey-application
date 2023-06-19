@@ -19,6 +19,8 @@ const Screen1 = ({ handleScreenChange }) => {
 
       <button className="btn btn-primary btn-lg mr-3" onClick={handleFillSurvey}>Fill out survey</button>
       <button className="btn btn-secondary btn-lg" onClick={handleViewResults}>View survey results</button>
+      <hr></hr>
+      <p>Developed with ❤️ by <a href='https://linktr.ee/mr_vance'>Vance Muchongo</a></p>
     </div>
     </div>
   );

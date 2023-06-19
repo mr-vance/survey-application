@@ -220,4 +220,10 @@ body {
   .error {
     color: red;
   }
+
+  .heart::before { 
+    content: "\2665"; /* Unicode value for a heart */
+    font-size: 2rem; /* set font size */
+    color: red; /* set color */
+  }
   
