@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { firebase, database } from '../firebase';
+import {database } from '../firebase';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBIcon } from 'mdbreact';
+import 'mdbreact/dist/css/mdb.css';
 
 const Screen3 = ({ handleScreenChange }) => {
   const [surveyData, setSurveyData] = useState([]);

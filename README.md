@@ -80,7 +80,7 @@ If you want to challenge yourself, you can consider the following enhancements:
 
 ## Technologies Used
 
-- ReactJS, HTML, CSS, Google Firebase
+- ReactJS, HTML, CSS, Google Firebase, Material Design Bootstrap, Bootstrap
 
 ## Getting Started
 
