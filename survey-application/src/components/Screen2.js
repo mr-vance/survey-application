@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { firebase, database } from '../firebase';
+import {database } from '../firebase';
 
 const Screen2 = ({ handleScreenChange }) => {
   const [surname, setSurname] = useState('');
@@ -50,7 +50,9 @@ const Screen2 = ({ handleScreenChange }) => {
 
   return (
     <div className="container">
-      <h2>Screen 2 - Survey Form</h2>
+        <div className="jumbotron text-center">
+      <h2 className="display-4">Screen 2 - Survey Form</h2>
+      <p className="lead">Welcome to Screen 2</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Surname:</label>
@@ -262,9 +264,10 @@ const Screen2 = ({ handleScreenChange }) => {
     required
   />
 </div>
-        <button type="submit">Submit</button>
-        <button onClick={() => handleScreenChange(1)}>Return to HomePage</button>
+        <button type="submit" className="btn btn-primary btn-lg mr-3">Submit</button>
+        <button className="btn btn-secondary btn-lg" onClick={() => handleScreenChange(1)}>Return to HomePage</button>
       </form>
+    </div>
     </div>
   );
 };

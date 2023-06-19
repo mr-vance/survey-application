@@ -12,9 +12,12 @@ const Screen1 = ({ handleScreenChange }) => {
 
   return (
     <div className="container">
-      <h1>Screen 1</h1>
-      <button onClick={handleFillSurvey}>Fill out survey</button>
-      <button onClick={handleViewResults}>View survey results</button>
+        <div className="jumbotron text-center">
+      <h1 className="display-4">Survey Application</h1>
+      <p className="lead">Welcome to Screen 1</p>
+      <button className="btn btn-primary btn-lg mr-3" onClick={handleFillSurvey}>Fill out survey</button>
+      <button className="btn btn-secondary btn-lg" onClick={handleViewResults}>View survey results</button>
+    </div>
     </div>
   );
 };

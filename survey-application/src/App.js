@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Screen1 from './components/Screen1';
 import Screen2 from './components/Screen2';
 import Screen3 from './components/Screen3';
-import reportWebVitals from './reportWebVitals';
-import firebase from './firebase'; // Import firebase configuration
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(1);

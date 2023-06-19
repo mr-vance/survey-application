@@ -71,27 +71,30 @@ const Screen3 = ({ handleScreenChange }) => {
     const surveyStats = calculateSurveyStatistics();
 
     return (
-      <div className="container">
-        <h2>Survey Statistics</h2>
-        <p>Total number of surveys: {surveyStats.totalSurveys}</p>
-        <p>Average age: {surveyStats.averageAge}</p>
-        <p>Oldest person who participated: {surveyStats.oldestPerson}</p>
-        <p>Youngest person who participated: {surveyStats.youngestPerson}</p>
-        <p>Percentage of people who like Pizza: {surveyStats.pizzaPercentage}%</p>
-        <p>Percentage of people who like Pasta: {surveyStats.pastaPercentage}%</p>
-        <p>Percentage of people who like Pap and Wors: {surveyStats.papAndWorsPercentage}%</p>
-        <p>Average rating for "People like to eat out": {surveyStats.avgRatingEatOut}</p>
-        <p>Average rating for "People like to watch movies": {surveyStats.avgRatingMovies}</p>
-        <p>Average rating for "People like to watch TV": {surveyStats.avgRatingTV}</p>
-        <p>Average rating for "People like to listen to the radio": {surveyStats.avgRatingRadio}</p>
-      </div>
+    <div className="container">
+        <div className="jumbotron text-center">
+            <h2 className="display-4">Survey Statistics</h2>
+            <p className="lead">Welcome to Screen 3</p>
+            <p>Total number of surveys: {surveyStats.totalSurveys}</p>
+            <p>Average age: {surveyStats.averageAge}</p>
+            <p>Oldest person who participated: {surveyStats.oldestPerson}</p>
+            <p>Youngest person who participated: {surveyStats.youngestPerson}</p>
+            <p>Percentage of people who like Pizza: {surveyStats.pizzaPercentage}%</p>
+            <p>Percentage of people who like Pasta: {surveyStats.pastaPercentage}%</p>
+            <p>Percentage of people who like Pap and Wors: {surveyStats.papAndWorsPercentage}%</p>
+            <p>Average rating for "People like to eat out": {surveyStats.avgRatingEatOut}</p>
+            <p>Average rating for "People like to watch movies": {surveyStats.avgRatingMovies}</p>
+            <p>Average rating for "People like to watch TV": {surveyStats.avgRatingTV}</p>
+            <p>Average rating for "People like to listen to the radio": {surveyStats.avgRatingRadio}</p>
+        </div>
+    </div>
     );
   };
 
   return (
     <div className="container">
       {renderSurveyStats()}
-      <button onClick={() => handleScreenChange(1)}>Return to HomePage</button>
+      <button className="btn btn-secondary btn-lg" onClick={() => handleScreenChange(1)}>Return to HomePage</button>
       
     </div>
   );
