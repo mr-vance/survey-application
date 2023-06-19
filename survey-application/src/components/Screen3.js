@@ -21,7 +21,7 @@ const Screen3 = ({ handleScreenChange }) => {
   const calculateSurveyStatistics = () => {
     const totalSurveys = surveyData.length;
     const ages = surveyData.map((survey) => Number(survey.age));
-    const averageAge = calculateAverage(ages);
+    const averageAge = calculateAverage(ages).toFixed(2);
     const oldestPerson = Math.max(...ages);
     const youngestPerson = Math.min(...ages);
     const pizzaPercentage = calculateFoodPercentage('Pizza');

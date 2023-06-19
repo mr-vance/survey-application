@@ -176,22 +176,25 @@ const Screen2 = ({ handleScreenChange }) => {
         />
         {errors.age && <div className="error">{errors.age}</div>}
         </div>
-          <div className="form-group">
+        <div className="form-group">
             <label htmlFor="favoriteFoods">Favorite Foods. Select multiple items by holding down the Ctrl key:</label>
             <select
-              multiple
-              className="form-control"
-              id="favoriteFoods"
-              value={favoriteFoods}
-              onChange={(e) => setFavoriteFoods(Array.from(e.target.selectedOptions, (option) => option.value))}
+                multiple
+                className="form-control"
+                id="favoriteFoods" 
+                value={favoriteFoods}
+                onChange={(e) => setFavoriteFoods(Array.from(e.target.selectedOptions, (option) => option.value))}
             >
-              <option value="pizza">Pizza</option>
-              <option value="burger">Burger</option>
-              <option value="sushi">Sushi</option>
-              <option value="pasta">Pasta</option>
+                <option value="Pizza">Pizza</option>
+                <option value="Pasta">Pasta</option>
+                <option value="Pap and Wors">Pap and Wors</option>
+                <option value="Chicken stir fry">Chicken stir fry</option>
+                <option value="Beef stir fry">Beef stir fry</option>
+                <option value="Other">Other</option>
             </select>
             {errors.favoriteFoods && <div className="error">{errors.favoriteFoods}</div>}
-          </div>
+            </div>
+
           <div className="form-group">
             <label htmlFor="eatOutRating">Rate Eating Out (1-5):</label>
             <input
