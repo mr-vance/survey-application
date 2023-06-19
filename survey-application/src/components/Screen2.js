@@ -263,6 +263,7 @@ const Screen2 = ({ handleScreenChange }) => {
   />
 </div>
         <button type="submit">Submit</button>
+        <button onClick={() => handleScreenChange(1)}>Return to HomePage</button>
       </form>
     </div>
   );
