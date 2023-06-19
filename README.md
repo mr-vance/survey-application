@@ -16,6 +16,8 @@ The user interface consists of three screens:
 - Clicking on the first button takes the user to Screen 2.
 - Clicking on the second button takes the user to Screen 3.
 
+![Screen 1](/images/screen-1.png)
+
 #### Screen 2
 
 - Survey form for users to fill out:
@@ -40,6 +42,8 @@ The user interface consists of three screens:
   - Submit button to save data to the database
 - After submitting, the user is returned to Screen 1.
 
+![Screen 2](/images/screen-2.png)
+
 #### Screen 3
 
 - Results screen showing survey statistics:
@@ -55,6 +59,8 @@ The user interface consists of three screens:
   - Average rating for "People like to watch TV"
   - Average rating for "People like to listen to the radio"
 - OK button to return to Screen 1.
+
+![Screen 3](/images/screen-3.png)
 
 ### Calculations
 
