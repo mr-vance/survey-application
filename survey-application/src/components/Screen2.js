@@ -39,6 +39,8 @@ const Screen2 = ({ handleScreenChange }) => {
     setContactNumber('');
     setDate('');
     setAge('');
+
+
     setFavoriteFoods([]);
     setRatings({});
 
@@ -209,55 +211,57 @@ const Screen2 = ({ handleScreenChange }) => {
           </div>
         </div>
         <div>
-          <label>I like to eat out:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={ratings.eatOut}
-            onChange={(e) =>
-              setRatings({ ...ratings, eatOut: e.target.value })
-            }
-            required
-          />
-        </div>
-        <div>
-          <label>I like to watch movies:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={ratings.watchMovies}
-            onChange={(e) =>
-              setRatings({ ...ratings, watchMovies: e.target.value })
-            }
-            required
-          />
-        </div>
-        <div>
-          <label>I like to watch TV:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={ratings.watchTV}
-            onChange={(e) => setRatings({ ...ratings, watchTV: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <label>I like to listen to the radio:</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={ratings.listenToRadio}
-            onChange={(e) =>
-              setRatings({ ...ratings, listenToRadio: e.target.value })
-            }
-            required
-          />
-        </div>
+  <label>I like to eat out:</label>
+  <input
+    type="number"
+    min="1"
+    max="5"
+    value={ratings.eatOut}
+    onChange={(e) =>
+      setRatings({ ...ratings, eatOut: e.target.value })
+    }
+    required
+  />
+</div>
+<div>
+  <label>I like to watch movies:</label>
+  <input
+    type="number"
+    min="1"
+    max="5"
+    value={ratings.watchMovies}
+    onChange={(e) =>
+      setRatings({ ...ratings, watchMovies: e.target.value })
+    }
+    required
+  />
+</div>
+<div>
+  <label>I like to watch TV:</label>
+  <input
+    type="number"
+    min="1"
+    max="5"
+    value={ratings.watchTV}
+    onChange={(e) =>
+      setRatings({ ...ratings, watchTV: e.target.value })
+    }
+    required
+  />
+</div>
+<div>
+  <label>I like to listen to the radio:</label>
+  <input
+    type="number"
+    min="1"
+    max="5"
+    value={ratings.listenToRadio}
+    onChange={(e) =>
+      setRatings({ ...ratings, listenToRadio: e.target.value })
+    }
+    required
+  />
+</div>
         <button type="submit">Submit</button>
       </form>
     </div>

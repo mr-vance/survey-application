@@ -52,10 +52,11 @@ const Screen3 = ({ handleScreenChange }) => {
 
   const calculateFoodPercentage = (food) => {
     const count = surveyData.filter((survey) =>
-      survey.favoriteFood.includes(food)
+      survey.favoriteFoods.includes(food)
     ).length;
     return ((count / surveyData.length) * 100).toFixed(2);
   };
+  
 
   const calculateAverageRating = (category) => {
     const ratings = surveyData.map((survey) => Number(survey.ratings[category]));
