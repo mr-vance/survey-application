@@ -93,9 +93,10 @@ If you want to challenge yourself, you can consider the following enhancements:
 - Clone/Download the project: `git clone https://github.com/mr-vance/survey-application.git`.
 - Navigate to the project directory: `cd survey-application`.
 - Install the Node Package Manager (NPM): `npm i`.
+- Install react scripts: `npm i react-scripts`
 - Install Firebase libraries: `npm install firebase`.
 - Compile and run the app: `npm start`.
-- Run the following npm command to install the CLI or update to the latest CLI version: `npm install -g firebase-tools`. Note that you might have to install this as root/admin should you run into an `EACCESS` error.
+- Compile and build: `npm run build`.
 
 
 ## License
