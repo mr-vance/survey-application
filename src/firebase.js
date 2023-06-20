@@ -16,6 +16,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-const database = firebase.database(); // Use the database function directly
+const database = firebase.database(); 
 
 export { firebase, database };

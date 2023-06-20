@@ -3,6 +3,13 @@ import { database } from '../firebase';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBIcon } from 'mdbreact';
 import 'mdbreact/dist/css/mdb.css';
 
+/**
+ * Represents the second screen of the survey application.
+ * Allows the user to fill out a survey form.
+ *
+ * @param {function} handleScreenChange - Function to handle screen navigation.
+ * @returns {JSX.Element} Screen2 component.
+ */
 const Screen2 = ({ handleScreenChange }) => {
   const [surname, setSurname] = useState('');
   const [firstNames, setFirstNames] = useState('');
@@ -20,95 +27,114 @@ const Screen2 = ({ handleScreenChange }) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  /**
+   * Validates a South African phone number format.
+   *
+   * @param {string} contactNumber - The contact number to validate.
+   * @returns {boolean} True if the contact number is valid, false otherwise.
+   */
   const validateContactNumber = (contactNumber) => {
     // South African phone number format: 10 digits starting with 0
     const phoneNumberPattern = /^0\d{9}$/;
     return phoneNumberPattern.test(contactNumber);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-  
-    // Clear previous errors
-    setErrors({});
-  
-    // Form validation
-    const validationErrors = {};
-  
-    if (!surname.trim()) {
-      validationErrors.surname = 'Surname is required';
-    }
-  
-    if (!firstNames.trim()) {
-      validationErrors.firstNames = 'First Names are required';
-    }
-  
-    if (!contactNumber.trim()) {
-      validationErrors.contactNumber = 'Contact Number is required';
-    } else if (!validateContactNumber(contactNumber)) {
-      validationErrors.contactNumber = 'Please enter a valid South African phone number';
-    }
-  
-    if (favoriteFoods.length === 0) {
-      validationErrors.favoriteFoods = 'Please select at least one Favorite Food';
-    }
-  
-    if (parseInt(ratings.eatOut) > 5 || parseInt(ratings.eatOut) < 1) {
-      validationErrors.eatOutRating = 'Please enter a rating between 1 and 5';
-    }
-  
-    if (parseInt(ratings.watchMovies) > 5 || parseInt(ratings.watchMovies) < 1) {
-      validationErrors.moviesRating = 'Please enter a rating between 1 and 5';
-    }
-  
-    if (parseInt(ratings.watchTV) > 5 || parseInt(ratings.watchTV) < 1) {
-      validationErrors.tvRating = 'Please enter a rating between 1 and 5';
-    }
-  
-    if (parseInt(ratings.listenToRadio) > 5 || parseInt(ratings.listenToRadio) < 1) {
-      validationErrors.radioRating = 'Please enter a rating between 1 and 5';
-    }
-  
-    if (!age || age < 5 || age > 120) {
-      validationErrors.age = 'Please enter an age between 5 and 120';
-    }
-  
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      setIsSubmitting(false);
-      return;
-    }
-  
-    // Get the form data
-    const formData = {
-      surname: surname,
-      firstNames: firstNames,
-      contactNumber: contactNumber,
-      date: date,
-      age: age,
-      favoriteFoods: favoriteFoods,
-      ratings: ratings,
-    };
-  
-    // Save the data to the database
-    const surveyRef = database.ref('surveys');
-    surveyRef.push(formData);
-  
-    // Reset the form fields
-    setSurname('');
-    setFirstNames('');
-    setContactNumber('');
-    setDate('');
-    setAge('');
-    setFavoriteFoods([]);
-    setRatings({});
+/**
+ * Handles the form submission.
+ *
+ * @param {Event} event - The form submission event.
+ */
+const handleSubmit = (event) => {
+  event.preventDefault();
+  setIsSubmitting(true);
+
+  // Clear previous errors
+  setErrors({});
+
+  // Form validation
+  const validationErrors = {};
+
+  if (!surname.trim()) {
+    validationErrors.surname = 'Surname is required';
+  }
+
+  if (!firstNames.trim()) {
+    validationErrors.firstNames = 'First Names are required';
+  }
+
+  if (!contactNumber.trim()) {
+    validationErrors.contactNumber = 'Contact Number is required';
+  } else if (!validateContactNumber(contactNumber)) {
+    validationErrors.contactNumber = 'Please enter a valid South African phone number';
+  }
+
+  if (favoriteFoods.length === 0) {
+    validationErrors.favoriteFoods = 'Please select at least one Favorite Food';
+  }
+
+  if (!ratings.eatOut) {
+    validationErrors.eatOutRating = 'Please enter a rating for eating out';
+  } else if (parseInt(ratings.eatOut) > 5 || parseInt(ratings.eatOut) < 1) {
+    validationErrors.eatOutRating = 'Please enter a rating between 1 and 5';
+  }
+
+  if (!ratings.watchMovies) {
+    validationErrors.moviesRating = 'Please enter a rating for watching movies';
+  } else if (parseInt(ratings.watchMovies) > 5 || parseInt(ratings.watchMovies) < 1) {
+    validationErrors.moviesRating = 'Please enter a rating between 1 and 5';
+  }
+
+  if (!ratings.watchTV) {
+    validationErrors.tvRating = 'Please enter a rating for watching TV';
+  } else if (parseInt(ratings.watchTV) > 5 || parseInt(ratings.watchTV) < 1) {
+    validationErrors.tvRating = 'Please enter a rating between 1 and 5';
+  }
+
+  if (!ratings.listenToRadio) {
+    validationErrors.radioRating = 'Please enter a rating for listening to the radio';
+  } else if (parseInt(ratings.listenToRadio) > 5 || parseInt(ratings.listenToRadio) < 1) {
+    validationErrors.radioRating = 'Please enter a rating between 1 and 5';
+  }
+
+  if (!age || age < 5 || age > 120) {
+    validationErrors.age = 'Please enter an age between 5 and 120';
+  }
+
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
     setIsSubmitting(false);
-  
-    // Return to Screen 1
-    handleScreenChange(1);
+    return;
+  }
+
+  // Get the form data
+  const formData = {
+    surname: surname,
+    firstNames: firstNames,
+    contactNumber: contactNumber,
+    date: date,
+    age: age,
+    favoriteFoods: favoriteFoods,
+    ratings: ratings,
   };
-  
+
+  // Save the data to the database
+  const surveyRef = database.ref('surveys');
+  surveyRef.push(formData);
+
+  // Reset the form fields
+  setSurname('');
+  setFirstNames('');
+  setContactNumber('');
+  setDate('');
+  setAge('');
+  setFavoriteFoods([]);
+  setRatings({});
+  setIsSubmitting(false);
+
+  // Return to Screen 1
+  handleScreenChange(1);
+};
+
 
   return (
     <div className="container">
@@ -165,36 +191,35 @@ const Screen2 = ({ handleScreenChange }) => {
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
-                <div className="form-group">
-        <label htmlFor="age">Age:</label>
-        <input
-            type="number"
-            className="form-control"
-            id="age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-        />
-        {errors.age && <div className="error">{errors.age}</div>}
-        </div>
-        <div className="form-group">
+          <div className="form-group">
+            <label htmlFor="age">Age:</label>
+            <input
+              type="number"
+              className="form-control"
+              id="age"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+            />
+            {errors.age && <div className="error">{errors.age}</div>}
+          </div>
+          <div className="form-group">
             <label htmlFor="favoriteFoods">Favorite Foods. Select multiple items by holding down the Ctrl key:</label>
             <select
-                multiple
-                className="form-control"
-                id="favoriteFoods" 
-                value={favoriteFoods}
-                onChange={(e) => setFavoriteFoods(Array.from(e.target.selectedOptions, (option) => option.value))}
+              multiple
+              className="form-control"
+              id="favoriteFoods"
+              value={favoriteFoods}
+              onChange={(e) => setFavoriteFoods(Array.from(e.target.selectedOptions, (option) => option.value))}
             >
-                <option value="Pizza">Pizza</option>
-                <option value="Pasta">Pasta</option>
-                <option value="Pap and Wors">Pap and Wors</option>
-                <option value="Chicken stir fry">Chicken stir fry</option>
-                <option value="Beef stir fry">Beef stir fry</option>
-                <option value="Other">Other</option>
+              <option value="Pizza">Pizza</option>
+              <option value="Pasta">Pasta</option>
+              <option value="Pap and Wors">Pap and Wors</option>
+              <option value="Chicken stir fry">Chicken stir fry</option>
+              <option value="Beef stir fry">Beef stir fry</option>
+              <option value="Other">Other</option>
             </select>
             {errors.favoriteFoods && <div className="error">{errors.favoriteFoods}</div>}
-            </div>
-
+          </div>
           <div className="form-group">
             <label htmlFor="eatOutRating">Rate Eating Out (1-5):</label>
             <input
